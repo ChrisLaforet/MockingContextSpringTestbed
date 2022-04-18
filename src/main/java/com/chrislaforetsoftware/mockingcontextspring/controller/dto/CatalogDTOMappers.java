@@ -2,6 +2,8 @@ package com.chrislaforetsoftware.mockingcontextspring.controller.dto;
 
 import com.chrislaforetsoftware.mockingcontextspring.business.entity.IBook;
 import com.chrislaforetsoftware.mockingcontextspring.business.entity.ICatalog;
+import com.chrislaforetsoftware.mockingcontextspring.entity.CatalogRecord;
+import com.chrislaforetsoftware.mockingcontextspring.service.impl.IsbnResponse;
 
 public class CatalogDTOMappers {
 
@@ -23,6 +25,14 @@ public class CatalogDTOMappers {
 		response.setAuthor(book.getTitleInstance().getAuthor());
 		response.setIsbn(book.getTitleInstance().getISBN());
 		response.setPrice(book.getPrice());;
+		return response;
+	}
+
+	public static TitleResponseDTO mapOpenLibraryIsbnResponseToTitleResponseDTO(IsbnResponse isbnResponse) {
+		TitleResponseDTO response = new TitleResponseDTO();
+		response.setISBN(isbnResponse.getIsbn());
+		response.setAuthor(isbnResponse.getAuthor());
+		response.setTitle(isbnResponse.getTitle());
 		return response;
 	}
 }
