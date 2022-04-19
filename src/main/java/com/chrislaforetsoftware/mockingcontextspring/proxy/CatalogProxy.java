@@ -38,7 +38,10 @@ public class CatalogProxy {
 
 	public Optional<TitleResponseDTO> getTitleByIsbn(String isbn) {
 		Optional<ICatalog> catalog = getTitleByISBNQueryHandler.handle(new GetTitleByISBNQuery(isbn));
-		return catalog.map(CatalogDTOMappers::mapCatalogToTitleResponseDTO);
+		if (catalog.isPresent()) {
+			return catalog.map(CatalogDTOMappers::mapCatalogToTitleResponseDTO);
+		}
+		return Optional.empty();
 	}
 
 	public TitleResponseDTO addTitle(AddTitleRequestDTO requestDTO) {
