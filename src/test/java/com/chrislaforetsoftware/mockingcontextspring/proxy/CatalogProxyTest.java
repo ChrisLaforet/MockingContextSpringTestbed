@@ -1,5 +1,6 @@
 package com.chrislaforetsoftware.mockingcontextspring.proxy;
 
+import com.chrislaforetsoftware.mockingcontext.MockingContext;
 import com.chrislaforetsoftware.mockingcontextspring.business.entity.IBook;
 import com.chrislaforetsoftware.mockingcontextspring.business.entity.ICatalog;
 import com.chrislaforetsoftware.mockingcontextspring.business.handler.commands.AddBookCommandHandler;
@@ -22,10 +23,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class CatalogProxyTest {
 
 	@InjectMocks
@@ -48,6 +50,14 @@ public class CatalogProxyTest {
 	GetBooksByISBNQueryHandler getBooksByISBNQueryHandler;
 
 	private static final String VALID_ISBN = "1234567890";
+
+	@Test
+	public void givenMockingContext_whenMockContextCalled_thenLocatesInjectMocks() throws Exception {
+		MockingContext mockingContext = MockingContext.createInstance();
+		mockingContext.mockContext();
+
+		assertNotNull(this.proxy);
+	}
 
 	@Test
 	public void givenIsbn_whenRequestingTitle_thenReturnsTitleResponse() {
